@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button,Container } from '@chakra-ui/react';
+import { Box, Button,Container } from '@chakra-ui/react';
 import {Routes,Route, Navigate} from "react-router-dom";
 import PostPage from './pages/PostPage';
 import UserPage from './pages/UserPage';
@@ -16,6 +16,7 @@ const App =()=>{
     const user = useRecoilValue(userAtom)
     // const { colorMode, toggleColorMode } = useColorMode()
     return(
+        <Box position={"relative"} w='full'>
         <Container maxW="620px">
        <Header/>
        <Routes>
@@ -38,6 +39,7 @@ const App =()=>{
        
 
         </Container>
+        </Box>
     )
 }
 
