@@ -10,6 +10,7 @@ import Auth from "./pages/Auth"
 import {useRecoilValue} from "recoil"
 import userAtom from "./atom/userAtom"
 import CreatePost from "./components/CreatePost"
+import ChatPage from './components/ChatPage';
 
 const App =()=>{
     const user = useRecoilValue(userAtom)
@@ -28,7 +29,9 @@ const App =()=>{
                <CreatePost/>
                </>
            ):(<userPage/>)} />
-           <Route path="/:username/post/:pid" element={ <PostPage/>  } />
+           <Route path="/:username/post/:pid" element={ <PostPage/>}/>
+           <Route path="/chat" element={ user ? <ChatPage/>:<Navigate to="/auth"/>}/>
+           
 
        </Routes>
        

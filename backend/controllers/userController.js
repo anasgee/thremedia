@@ -200,14 +200,6 @@ const updateUser = async (req, res) => {
 
     // // password should be null in response
 
-    // await Post.updateMany(
-    //   { "replies.userId": userId },
-    //   {
-    //     $set: { "replies.$[reply].username ": user.name ,
-    //     "replies.$[reply].userProfilePic": user.profilePic}
-    //   },
-    //   { arrayFilters: [{ "reply.userId": userid }] }
-    // );
     user.password = null;
 
     res.status(200).json(user);
