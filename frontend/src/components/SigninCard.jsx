@@ -60,8 +60,8 @@ const handleSignin = async () => {
 
     if(data.error){
       toast("Error Here",data.error,"error")
+      // console.log(data.error)
       return;
-      console.log(data.error)
     }
     localStorage.setItem("user-threads", JSON.stringify(data));
     setUser(data);

@@ -9,7 +9,6 @@ import UpdateProfile from './pages/UpdateProfile';
 import Auth from "./pages/Auth"
 import {useRecoilValue} from "recoil"
 import userAtom from "./atom/userAtom"
-import LogoutButton from "./components/LogoutButton"
 import CreatePost from "./components/CreatePost"
 
 const App =()=>{
@@ -32,7 +31,8 @@ const App =()=>{
            <Route path="/:username/post/:pid" element={ <PostPage/>  } />
 
        </Routes>
-       {user && <LogoutButton/>}
+       
+       
 
         </Container>
     )

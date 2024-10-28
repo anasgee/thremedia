@@ -19,6 +19,7 @@ const toast = useToast();
   useEffect(()=>{
     const getFeed = async()=>{
       setLoading(true)
+      setPosts([]);
       try{
         const res = await fetch("/api/posts/feed");
         const data =await res.json();

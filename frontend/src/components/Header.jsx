@@ -1,55 +1,66 @@
-import React from 'react'
-import {Flex,Image,useColorMode, Link} from "@chakra-ui/react"
-import {useRecoilValue} from "recoil";
-import {AiFillHome} from 'react-icons/ai'
-import {RxAvatar} from 'react-icons/rx'
-import userAtom from "../atom/userAtom"
-import {Link as RouterLink} from "react-router-dom"
-
-
-
+import React from "react";
+import { Flex, Image, useColorMode, Link, Button } from "@chakra-ui/react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { AiFillHome } from "react-icons/ai";
+import { RxAvatar } from "react-icons/rx";
+import userAtom from "../atom/userAtom";
+import { Link as RouterLink } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
+import useLogout from "../hooks/useLogout";
+import authScreenAtom from "../atom/authscreenatom";
 
 const Header = () => {
-    const {colorMode,toggleColorMode} = useColorMode();
-    const user = useRecoilValue(userAtom);
-
-
-
+  const { colorMode, toggleColorMode } = useColorMode();
+  const user = useRecoilValue(userAtom);
+  const logout = useLogout();
+  const setAuthScreen = useSetRecoilState(authScreenAtom);
 
   return (
     <div>
-      <Flex  justifyContent={"space-between"}  mt={6} mb='12' >
-      {user && (
-				<Link as={RouterLink} to='/'>
-					<AiFillHome size={24} />
-				</Link>
-			)}
+      <Flex justifyContent={"space-between"} mt={6} mb="12">
+        {user && (
+          <Link as={RouterLink} to="/">
+            <AiFillHome size={24} />
+          </Link>
+        )}
 
-    
-        <Image onClick ={toggleColorMode}
-        width='30px'
-        height='3 0px'
-        cursor={"pointer"}
-        alt="logo"
-        src={colorMode=== 'dark' ? "/light-logo.svg" : "threads.svg"}
-        />   
+{!user && (
+          <Link as={RouterLink} to="/auth" onClick={()=>setAuthScreen('login')}>
+           Login
+          </Link>
+        )}
+        <Image
+          onClick={toggleColorMode}
+          width="30px"
+          height="3 0px"
+          cursor={"pointer"}
+          alt="logo"
+          src={colorMode === "dark" ? "/light-logo.svg" : "threads.svg"}
+        />
 
-{user && (
-
-					<Link as={RouterLink} to={`/${user.username}`}>
-						<RxAvatar size={24} />
-					</Link>
-		
-
-	
-			)}
-
-
-
-    </Flex>
-
+        {user && (
+          <Flex alignItems={"center"} gap={4}>
+            <Link as={RouterLink} to={`/${user.username}`}>
+              <RxAvatar size={24} />
+              
+            </Link>
+            <Button
+              size={"xs"}
+              onClick={logout}
+            >
+              <FiLogOut size={20} />
+            </Button>
+          
+          </Flex>
+        )}
+        {!user && (
+          <Link as={RouterLink} to="/auth" onClick={()=>setAuthScreen('signup')}>
+           Sign Up
+          </Link>
+        )}
+      </Flex>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

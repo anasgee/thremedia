@@ -19,7 +19,7 @@ const Actions = ({post}) => {
 	const [posts,setPosts] = useRecoilState(postAtom);
 	const [reply,setReply] = useState('');
 	const [isReplying,setIsReplying] = useState(false);
-	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 
 

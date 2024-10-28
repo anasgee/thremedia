@@ -9,6 +9,7 @@ import useToast from "../hooks/showToast"
 import { useRecoilValue, useRecoilState } from 'recoil';
 import userAtom from "../atom/userAtom"
 import postAtom from '../atom/postAtom';
+import { useParams } from 'react-router-dom';
 
 const MAX_CHAR =500
 
@@ -24,7 +25,7 @@ const CreatePost = () => {
     const showToast = useToast();
     const user = useRecoilValue(userAtom)
     const imageRef = useRef(null);
-
+   const username = useParams();
 
     const handleTextChange =(e)=>{
             const inputText = e.target.value;
@@ -55,7 +56,11 @@ const CreatePost = () => {
                     return;
                 }
                 showToast("Success", "Post created successfully", "success");
-                setPosts([data,...posts]);
+               
+               if(username === user.name){
+
+                 setPosts([data,...posts]);
+               }
                 onClose();
                 setPostText("");
                 setImgUrl("");
