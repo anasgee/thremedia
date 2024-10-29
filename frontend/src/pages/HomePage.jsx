@@ -2,6 +2,8 @@ import React,{useEffect,useState} from 'react'
 import {Flex, Spinner,Box} from "@chakra-ui/react"
 import useToast from "../hooks/showToast"
 import Post from "../components/Post";
+import { useRecoilState } from 'recoil';
+import postAtom from '../atom/postAtom';
 
 
 
@@ -12,7 +14,8 @@ import Post from "../components/Post";
 
 
 const HomePage = () => {
-  const [posts,setPosts]=useState([]);
+  // const [posts,setPosts]=useState([]);
+  const [posts,setPosts] = useRecoilState(postAtom)
   const [loading,setLoading] = useState(false);
 const toast = useToast();  
 

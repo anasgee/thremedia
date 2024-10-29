@@ -30,7 +30,7 @@
 		const getPosts =async ()=>{
 
 			try{
-				const res = await fetch(`/api/posts/${pid}`, { cache: 'no-store' });
+				const res = await fetch(`/api/posts/${pid}`);
 				const data = await res.json();
 				if(data.error){
 					toast("Error",data.error,'error');

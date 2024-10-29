@@ -6,14 +6,13 @@ import {Modal,
 	ModalBody,
 	ModalCloseButton,Flex,Box,Text, useDisclosure, Button, FormControl, Input} from "@chakra-ui/react";
 import {useRecoilState, useRecoilValue} from "recoil";
-import useToast from "../hooks/showToast"
 import userAtom from "../atom/userAtom"
 import React, { useState } from 'react'
 import postAtom from "../atom/postAtom";
 import useShowToast from "../hooks/showToast";
 
 const Actions = ({post}) => {
-	const toast = useToast();
+	const toast = useShowToast();
 	const user = useRecoilValue(userAtom);
 	const [isLiking, setIsLiking] = useState(false);
 	const [posts,setPosts] = useRecoilState(postAtom);
@@ -52,6 +51,10 @@ const Actions = ({post}) => {
 				return p;
 			})
 			setPosts(updatedPost);
+
+
+			// debuggin skills update ho rhi hain
+			// console.log(updatedPost)
 		}
 		else{
 
@@ -62,6 +65,10 @@ const Actions = ({post}) => {
 				return p;
 			})
 			setPosts(updatedPost);
+
+			// to debug the post.
+			// console.log(updatedPost)
+
 		}		
 		setLiked(!liked)
 	   }catch(err){
