@@ -7,7 +7,7 @@ const protectedRoute = async(req,res,next)=>{
     try{
         const token = req.cookies.jwt;
         if(!token){
-            res.status(400).json({message:"Unauthorized access detected"});
+            res.status(400).json({error:"Unauthorized access detected"});
 
         }
         const decoded = jwt.verify(token,process.env.JWT_SECRET);

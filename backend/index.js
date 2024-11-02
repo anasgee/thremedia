@@ -5,6 +5,7 @@ const connectDB=  require("./db/connectDB");
 const cookieParser = require("cookie-parser");
 const userRoutes= require("./routes/userRoutes");
 const postRoutes = require('./routes/postRoutes');
+const messageRoute =require("./routes/messageRoutes")
 const v2 = require("cloudinary")
 const cloudinary = v2;
 dotenv.config();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 // routes
 app.use('/api/users',userRoutes);
 app.use('/api/posts',postRoutes);
+app.use('/api/messages',messageRoute);
 
 
 
