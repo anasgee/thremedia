@@ -117,7 +117,7 @@
 
 				{currentPost.img && (
 					<Box borderRadius={6} overflow={"hidden"} border={"1px solid"} borderColor={"gray.light"}>
-						<Image src={post.img} w={"full"} />
+						<Image src={currentPost.img} w={"full"} />
 					</Box>
 				)} 
 
