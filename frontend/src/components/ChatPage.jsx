@@ -1,6 +1,9 @@
-import { Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { Box, Button, Flex, Input, Skeleton, SkeletonCircle, Text, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import { GiConversation } from "react-icons/gi";
+import Conversation from "./Conversation";
+import MessageContainer from "./MessageContainer";
 
 const ChatPage = () => {
   return (
@@ -28,13 +31,49 @@ const ChatPage = () => {
           mx={"auto"}
         >
 
-<Text fontWeight={700} color={useColorModeValue("gray.600", "gray.400")}>
+            <Text fontWeight={700} color={useColorModeValue("gray.600", "gray.400")}>
 						Your Conversations
 					</Text>
 
+          <form >
+						<Flex alignItems={"center"} gap={2}>
+							<Input placeholder='Search for a user' onChange={(e) => setSearchText(e.target.value)} />
+							<Button size={"sm"} >
+							{/* <Button size={"sm"} onClick={handleConversationSearch} isLoading={searchingUser}> */}
+								<SearchIcon />
+							</Button>
+						</Flex>
+					</form>
 
+					{false &&
+						[0, 1, 2, 3, 4].map((_, i) => (
+							<Flex key={i} gap={4} alignItems={"center"} p={"1"} borderRadius={"md"}>
+								<Box>
+									<SkeletonCircle size={"10"} />
+								</Box>
+								<Flex w={"full"} flexDirection={"column"} gap={3}>
+									<Skeleton h={"10px"} w={"80px"} />
+									<Skeleton h={"8px"} w={"90%"} />
+								</Flex>
+
+							</Flex>
+						))}
+
+
+            <Conversation/>
+            <Conversation/>
+            <Conversation/>
+            <Conversation/>
+            <Conversation/>
+            <Conversation/>
+
+
+
+
+
+                  {/* Posts Conversations.,.,.,.,.,.,.,..,.,.,.,.,.,. */}
         </Flex>
-        <Flex
+        {/* <Flex
 						flex={70}
 						borderRadius={"md"}
 						p={2}
@@ -45,7 +84,8 @@ const ChatPage = () => {
 					>
 						<GiConversation size={100} />
 						<Text fontSize={20}>Select a conversation to start messaging</Text>
-					</Flex>
+					</Flex> */}
+          <MessageContainer/>
       </Flex>
     </Box>
   );
