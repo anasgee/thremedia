@@ -8,6 +8,7 @@ const createMessage = async(req,res)=>{
     const {recepientId,message} = req.body;
     const senderId = req.user._id;
 
+try {
     let conversation = await Conversation.findOne({
         participants :{$all:[senderId,recepientId]}})
 
@@ -37,9 +38,64 @@ const createMessage = async(req,res)=>{
         ])
 
 res.status(201).json(newMessage);
+} catch (error) {
+res.status(500).json({error:error.message});
+    
+}
 
 
 }
 
 
-module.exports = {createMessage}
+const getMessages = async(req,res)=>{
+
+    const {otherUserId}= req.params;
+    const userId = req.user._id;
+
+   try {
+    const conversation = await Conversation.findOne({
+        participants:{$all:[userId,otherUserId]}
+
+
+    })
+    if(!conversation){
+        res.status(404).json({error:"Conversation not Found"})
+    }
+    const messages = await Message.find({
+        conversationId:conversation._id,
+        
+    }).sort({createdAt:-1}); //last message
+
+    res.status(200).json(messages);
+
+   } catch (error) {
+    res.status(500).json({error:error.message})
+   }
+}
+
+
+const getConversations = async(req,res)=>{
+
+    const userId = req.user._id;
+
+try {
+    
+    let converstaions = await Conversation.find({participants:userId}).populate({
+        path:"participants",
+        select:"username profilePic"
+    })
+
+    converstaions.forEach(conversation=>{
+        conversation.participants = conversation.participants.filter(participant=>participant._id.toString() !==userId.toString())
+    })
+
+    res.status(200).json(converstaions);
+
+} catch (error) {
+    res.status(500).json({error:error.message});
+    
+}
+
+}
+
+module.exports = {createMessage,getConversations,getMessages}

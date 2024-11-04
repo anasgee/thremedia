@@ -25,7 +25,7 @@ const CreatePost = () => {
     const showToast = useToast();
     const user = useRecoilValue(userAtom)
     const imageRef = useRef(null);
-   const username = useParams();
+   const username = useParams(); 
 
     const handleTextChange =(e)=>{
             const inputText = e.target.value;
@@ -51,16 +51,18 @@ const CreatePost = () => {
                 });
     
                 const data = await res.json();
+                console.log(data);
+                console.log(username);
+                console.log(user.username)
                 if (data.error) {
                     showToast("Error", data.error, "error");
                     return;
                 }
                 showToast("Success", "Post created successfully", "success");
                
-               if(username === user.name){
-
-                 setPosts([data,...posts]);
-               }
+                if(username === user.username){
+                  setPosts([data,...posts])
+                }
                 onClose();
                 setPostText("");
                 setImgUrl("");
@@ -92,6 +94,7 @@ const CreatePost = () => {
           <ModalHeader>Create Post</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+
 
           <FormControl>
 							<Textarea

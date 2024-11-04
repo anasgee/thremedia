@@ -1,7 +1,5 @@
 import { Avatar, Divider, Flex, Text } from "@chakra-ui/react";
-import { BsThreeDots } from "react-icons/bs";
-import Actions from "./Actions";
-import { useState } from "react";
+
 
 const Comment = ({ reply,lastReply }) => {
 	

@@ -3,7 +3,7 @@ import UserHeader from '../components/UserHeader'
 // import UserPost from '../components/UserPost'
 import { useEffect } from 'react';
 import useShowToast  from "../hooks/showToast"
-import { useParams, Navigate, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Spinner,Flex } from '@chakra-ui/react';
 import Post from '../components/Post';
 import useGetUser from '../hooks/useGetUser';
@@ -15,13 +15,11 @@ const UserPage = () => {
   // const [loading,setLoading] = useState(true);
 
 
-const {user,loading} = useGetUser();
-  const [fetchingPosts,setFetchingPosts]=useState(false)
-  const [posts,setPosts]=useRecoilState(postAtom);
-
-  const { username } = useParams();
-  
-const showToast = useShowToast();
+     const {user,loading} = useGetUser();
+     const [fetchingPosts,setFetchingPosts]=useState(true)
+     const [posts,setPosts]=useRecoilState(postAtom);
+     const { username } = useParams();
+     const showToast = useShowToast();
 
 
   useEffect(() => {
@@ -33,7 +31,7 @@ const showToast = useShowToast();
 			try {
 				const res = await fetch(`/api/posts/user/${username}`);
 				const data = await res.json();
-				console.log(data);
+        console.log(data);
 				setPosts(data);
 			} catch (error) {
 				showToast("Error", error.message, "error");
@@ -42,12 +40,11 @@ const showToast = useShowToast();
 				setFetchingPosts(false);
 			}
 		};
-
-		getPosts();
+  		getPosts();
 
 
   }, [showToast,username,user,setPosts]);
-  // console.log(post)
+
 
 if(!user) return null;
 

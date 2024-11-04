@@ -10,7 +10,7 @@ import Auth from "./pages/Auth"
 import {useRecoilValue} from "recoil"
 import userAtom from "./atom/userAtom"
 import CreatePost from "./components/CreatePost"
-import ChatPage from './components/ChatPage';
+import ChatPage from './pages/ChatPage';
 
 const App =()=>{
     const user = useRecoilValue(userAtom)
