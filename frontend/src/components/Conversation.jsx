@@ -14,17 +14,17 @@ import {
 import { useRecoilState, useRecoilValue } from "recoil";
 import { BsCheck2All, BsFillImageFill } from "react-icons/bs";
 import userAtom from "../atom/userAtom";
-// import { selectedConversationAtom } from "../atoms/messagesAtom";
+import { selectedConversationAtom } from "../atom/messageAtom";
 
 const Conversation = ({ conversation}) => {
 	
 	const user = conversation.participants[0];
 	const currentUser = useRecoilValue(userAtom);
 	const lastMessage = conversation.lastMessage;
-	// const [selectedConversation, setSelectedConversation] = useRecoilState(selectedConversationAtom);
-	// const colorMode = useColorMode();
+	const [selectedConversation,setSelectedConversation] = useRecoilState(selectedConversationAtom);
+	const colorMode = useColorMode();
 
-	// console.log("selectedConverstion", selectedConversation);
+	console.log("selectedConverstion", selectedConversation);
 	return (
 		<Flex
 			gap={4}
@@ -35,18 +35,19 @@ const Conversation = ({ conversation}) => {
 				bg: useColorModeValue("gray.600", "gray.dark"),
 				color: "white",
 			}}
-			// onClick={() =>
-			// 	setSelectedConversation({
-			// 		_id: conversation._id,
-			// 		userId: user._id,
-			// 		userProfilePic: user.profilePic,
-			// 		username: user.username,
-			// 		mock: conversation.mock,
-			// 	})
-			// }
-			// bg={
-			// 	selectedConversation?._id === conversation._id ? (colorMode === "light" ? "gray.400" : "gray.dark") : ""
-			// }
+			onClick={() =>
+				setSelectedConversation({
+					_id: conversation._id,
+					userId: user._id,
+					userProfilePic: user.profilePic,
+					username: user.username,
+					// mock: conversation.mock,
+				})
+			}
+			bg={
+				selectedConversation?._id === conversation._id ? (colorMode === "light" ? "gray.400" : "gray.dark") : ""
+			// selectedConversation?._id === conversation._id ? useColorModeValue("gray.600","gray.dark"):""
+			}
 			borderRadius={"md"}
 		>
 			<WrapItem>
@@ -67,11 +68,8 @@ const Conversation = ({ conversation}) => {
 					{user.username} <Image src='/verified.png' w={4} h={4} ml={1} />
 				</Text>
 				<Text fontSize={"xs"} display={"flex"} alignItems={"center"} gap={1}>
-					{lastMessage.text.length >18 ? lastMessage.text.substring(0,18) +"..." : lastMessage.text }
 					{currentUser._id === lastMessage.sender ? 	<BsCheck2All size={16} /> : "" }
-						 
-					
-				
+					{lastMessage.text.length >18 ? lastMessage.text.substring(0,18) +"..." : lastMessage.text }
 				</Text>
 			</Stack>
 		</Flex>

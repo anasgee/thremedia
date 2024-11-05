@@ -1,9 +1,53 @@
 import { Avatar, Divider, Flex, Image, Skeleton, SkeletonCircle, Text, useColorModeValue } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Message from './Message'
 import MessageInput from './MessageInput'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { selectedConversationAtom } from '../atom/messageAtom'
+import useShowToast from '../hooks/showToast'
+import userAtom from '../atom/userAtom'
 
 const MessageContainer = () => {
+
+  const toast  = useShowToast()
+  const currentUser = useRecoilValue(userAtom)
+
+  const [selectedConversation,setSelectedConversation]  = useRecoilState(selectedConversationAtom);
+  const [loading,setLoading] = useState(true);
+  const [messages,setMessages] = useState([]);
+
+
+
+
+  useEffect(()=>{
+    const getMessages = async()=>{
+
+      try {
+        const res= await fetch(`/api/messages/${selectedConversation._id}`);
+        const data = await res.json();
+
+        if(data.error){
+          toast("Error",data.error,'error')
+        }
+        setMessages(data);
+         console.log(data)
+      } catch (error) {
+        toast("Error",error.message,'error')
+        
+      }finally{
+        setLoading(false);
+      }
+
+
+    }
+
+    getMessages();
+  },[toast,setSelectedConversation])
+
+
+
+
+
   return <Flex
   flex='70'
   bg={useColorModeValue("gray.200", "gray.dark")}
@@ -21,7 +65,7 @@ const MessageContainer = () => {
 
   <Divider />
 <Flex flexDir={"column"} gap={4} my={4} p={2} height={"400px"} overflowY={"auto"} >
-{ false && (
+{ loading && (
   [...Array(5)].map((_,i)=>{
     return <Flex
     alignItems={"center"}
@@ -42,10 +86,16 @@ const MessageContainer = () => {
     </Flex>
   })
 )}
- <Message ownMessage={true}/>
- <Message ownMessage={true}/>
- <Message ownMessage={false}/>
- <Message ownMessage={false}/>
+
+{!loading && (
+
+messages.map((message)=>{
+  <Message   key={message._id} message= {message} ownMessage={currentUser._id === message.sender}  />
+})
+)
+
+}
+ 
 
 </Flex>
 

@@ -7,5 +7,18 @@ const conversationAtom = atom({
     default:[]
 })
 
+const selectedConversationAtom  = atom({
+    key:"selectedConversationAtom",
+    default:{
+        _id:"",
+        username:"",
+        userProfilePic:"",
+        userId:""
+
+    }
+})
+
+
 
 export default conversationAtom;
+export {selectedConversationAtom};
