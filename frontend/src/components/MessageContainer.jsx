@@ -19,30 +19,30 @@ const MessageContainer = () => {
 
 
 
-  useEffect(()=>{
-    const getMessages = async()=>{
-
+  useEffect(() => {
+    const getMessages = async () => {
+      setLoading(true);
+      setMessages([]); // Reset messages
       try {
-        const res= await fetch(`/api/messages/${selectedConversation._id}`);
+        if(selectedConversation.mock) return;
+        const res = await fetch(`/api/messages/${selectedConversation.userId}`);
         const data = await res.json();
-
-        if(data.error){
-          toast("Error",data.error,'error')
+  
+        if (data.error) {
+          toast("Error", data.error, "error");
+          return;
         }
-        setMessages(data);
-         console.log(data)
+      
+        setMessages(data); // Ensure messages is an array
       } catch (error) {
-        toast("Error",error.message,'error')
-        
-      }finally{
+        toast("Error", error.message, "error");
+      } finally {
         setLoading(false);
       }
-
-
-    }
-
+    };
+  
     getMessages();
-  },[toast,setSelectedConversation])
+  }, [toast, selectedConversation.userId]);
 
 
 
@@ -57,9 +57,9 @@ const MessageContainer = () => {
 >
   {/* Message header */}
   <Flex w={"full"} h={12} alignItems={"center"} gap={2}>
-      <Avatar src="" size={"sm"} />
+      <Avatar src={selectedConversation.userProfilePic} size={"sm"} />
       <Text display={"flex"} alignItems={"center"}>
-         Anas <Image src='/verified.png' w={4} h={4} ml={1} />
+         {selectedConversation.username} <Image src='/verified.png' w={4} h={4} ml={1} />
       </Text>
   </Flex>
 
@@ -87,19 +87,16 @@ const MessageContainer = () => {
   })
 )}
 
-{!loading && (
-
-messages.map((message)=>{
-  <Message   key={message._id} message= {message} ownMessage={currentUser._id === message.sender}  />
-})
+{!loading && messages.map((message)=> <Message  key={message._id} message= {message} ownMessage={currentUser._id === message.sender}  />
 )
+
 
 }
  
 
 </Flex>
 
-  <MessageInput />
+  <MessageInput setMessages={setMessages} />
 </Flex>
 }
 

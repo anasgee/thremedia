@@ -24,7 +24,8 @@ const Conversation = ({ conversation}) => {
 	const [selectedConversation,setSelectedConversation] = useRecoilState(selectedConversationAtom);
 	const colorMode = useColorMode();
 
-	console.log("selectedConverstion", selectedConversation);
+	// console.log("selectedConverstion", selectedConversation);
+	if(!user) return null;	
 	return (
 		<Flex
 			gap={4}
@@ -41,7 +42,7 @@ const Conversation = ({ conversation}) => {
 					userId: user._id,
 					userProfilePic: user.profilePic,
 					username: user.username,
-					// mock: conversation.mock,
+					mock: conversation.mock,
 				})
 			}
 			bg={

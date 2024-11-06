@@ -42,8 +42,6 @@ res.status(201).json(newMessage);
 res.status(500).json({error:error.message});
     
 }
-
-
 }
 
 
@@ -59,14 +57,20 @@ const getMessages = async(req,res)=>{
 
     })
     if(!conversation){
-        res.status(404).json({error:"Conversation not Found"})
+        return res.status(404).json({error:"Conversation not Found"})
+        
     }
+  
     const messages = await Message.find({
         conversationId:conversation._id,
         
-    }).sort({createdAt:-1}); //last message
+    }).sort({createdAt:1}); //last message
+if(!messages){
+    return res.status(404).json({error:"Conversation not Found"})
 
+}
     res.status(200).json(messages);
+   
 
    } catch (error) {
     res.status(500).json({error:error.message})
@@ -82,7 +86,7 @@ try {
     
     let converstaions = await Conversation.find({participants:userId}).populate({
         path:"participants",
-        select:"username profilePic"
+        select:"username profilePic",
     })
 
     converstaions.forEach(conversation=>{
