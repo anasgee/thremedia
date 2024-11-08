@@ -6,6 +6,7 @@ import {ChakraProvider,ColorModeScript , extendTheme} from "@chakra-ui/react"
 import {BrowserRouter} from "react-router-dom";
 import { mode } from "@chakra-ui/theme-tools";
 import { RecoilRoot } from 'recoil'
+import SocketContextProvider from './context/SocketContext.jsx'
 
 
 // to set bacground color
@@ -41,7 +42,10 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
     <ChakraProvider theme={theme} >
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+   
+   <SocketContextProvider>
     <App />
+   </SocketContextProvider>
     </ChakraProvider>
     </BrowserRouter>
     </RecoilRoot>

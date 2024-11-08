@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const dotenv = require("dotenv");
 const connectDB=  require("./db/connectDB");
 const cookieParser = require("cookie-parser");
@@ -8,6 +7,9 @@ const postRoutes = require('./routes/postRoutes');
 const messageRoute =require("./routes/messageRoutes")
 const v2 = require("cloudinary")
 const cloudinary = v2;
+const {server,app}  =require("./socket/socket")
+
+
 dotenv.config();
 connectDB();
 
@@ -32,6 +34,6 @@ app.use('/api/messages',messageRoute);
 
 
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Server is listening to the port ${PORT} at localhost`);
 })

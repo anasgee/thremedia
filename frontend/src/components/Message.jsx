@@ -10,6 +10,13 @@ const Message = ({ownMessage,message}) => {
 	const [selectedConversation,setSelectedConversation ] = useRecoilState(selectedConversationAtom);
 	const user = useRecoilValue(userAtom)
 
+
+
+	
+
+
+
+
   return (
     <>
     

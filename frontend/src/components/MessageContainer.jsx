@@ -1,22 +1,61 @@
 import { Avatar, Divider, Flex, Image, Skeleton, SkeletonCircle, Text, useColorModeValue } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Message from './Message'
 import MessageInput from './MessageInput'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { selectedConversationAtom } from '../atom/messageAtom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import conversationAtom, { selectedConversationAtom } from '../atom/messageAtom'
 import useShowToast from '../hooks/showToast'
 import userAtom from '../atom/userAtom'
+import { useSocket } from '../context/SocketContext'
+// import setConversation from ""
 
 const MessageContainer = () => {
 
   const toast  = useShowToast()
   const currentUser = useRecoilValue(userAtom)
 
-  const [selectedConversation,setSelectedConversation]  = useRecoilState(selectedConversationAtom);
+  const selectedConversation = useRecoilValue(selectedConversationAtom);
+  const setConversations = useSetRecoilState(conversationAtom);
   const [loading,setLoading] = useState(true);
   const [messages,setMessages] = useState([]);
+  const {socket} = useSocket();
+  const endMessageRef = useRef();
 
 
+
+useEffect(()=>{
+
+  socket.on("newMessage",(newMessage)=>{
+    console.log(newMessage);
+    if(selectedConversation._id === newMessage.conversationId )
+{
+  setMessages((prevMessage)=> [...prevMessage,newMessage]);
+}
+
+    setConversations((prev)=>{
+        const updatedConversation = prev.map((conversation)=>{
+          if(conversation._id === newMessage.conversationId){
+            return { 
+              ...conversation,
+              lastMessage:{
+                sender:newMessage.sender,
+                text:newMessage.text
+              }
+            }
+          }
+          return conversation;
+        })
+        return updatedConversation;
+    })
+  })
+
+  return () => socket.off("newMessage")
+
+},[socket,selectedConversation,setConversations]);
+ 
+useEffect(()=>{
+  endMessageRef.current?.scrollIntoView({behavior:"smooth"})
+},[messages])
 
 
   useEffect(() => {
@@ -42,7 +81,7 @@ const MessageContainer = () => {
     };
   
     getMessages();
-  }, [toast, selectedConversation.userId]);
+  }, [toast, selectedConversation.userId,selectedConversation.mock]);
 
 
 
@@ -87,7 +126,12 @@ const MessageContainer = () => {
   })
 )}
 
-{!loading && messages.map((message)=> <Message  key={message._id} message= {message} ownMessage={currentUser._id === message.sender}  />
+{!loading && messages.map((message)=> <Flex  key={message._id} direction={"column"}
+ref={messages.length-1 === messages.indexOf(message) ? endMessageRef:null}
+>
+
+  <Message  message= {message} ownMessage={currentUser._id === message.sender}  />
+</Flex>
 )
 
 

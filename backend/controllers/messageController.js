@@ -1,5 +1,6 @@
 const Conversation = require("../models/conversationModel");
 const Message = require("../models/messageModel");
+const { getRecipientSocketId, io } = require("../socket/socket");
 
 
 const createMessage = async(req,res)=>{
@@ -36,6 +37,9 @@ try {
                 }  
             })
         ])
+    const recipientSocketId = getRecipientSocketId(recepientId);
+    console.log(recipientSocketId);
+    io.to(recipientSocketId).emit("newMessage",newMessage);
 
 res.status(201).json(newMessage);
 } catch (error) {
