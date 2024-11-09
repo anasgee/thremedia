@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, Image, Text } from '@chakra-ui/react'
 import {BsCheck2All} from "react-icons/bs"
 import React from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -23,7 +23,8 @@ const Message = ({ownMessage,message}) => {
     {ownMessage ? (
 				<Flex gap={2} alignSelf={"flex-end"}>
 				
-						<Flex bg={"green.800"} maxW={"350px"} p={1} borderRadius={"md"}>
+						{message.text && (
+							<Flex bg={"green.800"} maxW={"350px"} p={1} borderRadius={"md"}>
 							<Text color={"white"}>
                                {message.text}
 							   {/* <span style={{fontSize:"6px"}}>{message.createdAt} </span> */}
@@ -37,6 +38,19 @@ const Message = ({ownMessage,message}) => {
 								<BsCheck2All size={16} />
 							</Box>
 						</Flex>
+						)}
+
+
+						{message.img && (
+							<Flex mt={5} w={"200px"}>
+								<Image
+								 src='https://plus.unsplash.com/premium_photo-1673736136121-227cab583e22?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c291cmNlfGVufDB8fDB8fHww'
+								borderRadius={4}
+								alt='Message img'
+								/>
+
+							</Flex>
+						)}
                             <Avatar src={user.profilePic} w={7} h={7}/>
 				
                     </Flex>
@@ -45,10 +59,27 @@ const Message = ({ownMessage,message}) => {
     <Flex gap={2}>
 				
 						{/* <Flex bg={"gray.800"} maxW={"350px"} p={1} borderRadius={"md"}> */}
-                            <Avatar src={selectedConversation.userProfilePic} w={7} h={7}/>
+						<Avatar src={selectedConversation.userProfilePic} w={7} h={7}/>
+						{/* {message.text && ( */}
+						{message.text && (
 							<Text bg={"gray.800"} maxW={"350px"} p={1} borderRadius={"md"} color={"white"}>
                                 {message.text}
                             </Text>
+						)}
+							
+
+							{/* { true && ( */}
+							{message.img && (
+							<Flex mt={5} w={"200px"}>
+								<Image
+								 src='https://plus.unsplash.com/premium_photo-1673736136121-227cab583e22?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c291cmNlfGVufDB8fDB8fHww'
+								borderRadius={4}
+								alt='Message img'
+								/>
+
+							</Flex>
+						)}
+
 							{/* <Box
 								alignSelf={"flex-end"}
 								ml={1}

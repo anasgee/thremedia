@@ -68,6 +68,7 @@ useEffect(()=>{
   socket.on("messageSeen",({conversationId})=>{
 
     if(selectedConversation._id === conversationId ){
+
       setMessages((prev)=>{
         const updatedMessages = prev.map((message)=>{
           if(!message.seen){
@@ -80,6 +81,8 @@ useEffect(()=>{
         })
         return updatedMessages;
       })
+
+      // setConversations((prev)=> )
     }
   })
 
