@@ -16,9 +16,7 @@ import MessageContainer from "../components/MessageContainer";
 import useShowToast from "../hooks/showToast";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { GiConversation } from "react-icons/gi";
-import conversationAtom, {
-  selectedConversationAtom,
-} from "../atom/messageAtom";
+import conversationAtom, { selectedConversationAtom} from "../atom/messageAtom";
 import userAtom from "../atom/userAtom";
 import { useSocket } from "../context/SocketContext";
 

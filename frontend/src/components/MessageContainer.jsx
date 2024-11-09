@@ -165,6 +165,14 @@ useEffect(()=>{
 ref={messages.length-1 === messages.indexOf(message) ? endMessageRef:null}
 >
 
+
+
+
+
+
+
+
+
   <Message  message= {message} ownMessage={currentUser._id === message.sender}  />
 </Flex>
 )

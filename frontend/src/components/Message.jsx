@@ -90,7 +90,6 @@ const Message = ({ownMessage,message}) => {
 							</Box> */}
 						</Flex>
 				
-                    // </Flex>
   )
   }
     </>
