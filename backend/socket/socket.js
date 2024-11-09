@@ -1,6 +1,7 @@
 const {Server} = require("socket.io");
 const http = require("http");
 const express = require("express");
+const Message = require("../models/messageModel")
 
 
 const app = express();
@@ -30,6 +31,19 @@ io.on("connection",(socket)=>{
 
     // sent this user to front end
     io.emit("getOnlineUsers",Object.keys(userSoketMap));
+
+
+
+    socket.on("markMessageAsSeen",async({conversationId,userId})=>{
+        try {
+            await Message.updateMany({conversationId,seen:false},{$set:{seen:true,}});
+            io.to(userSoketMap[userId]).emit("messageSeen",{conversationId});
+        } catch (error) {
+            console.log(error.message)
+        }
+    })
+
+
 
     socket.on("disconnect",()=>{
          console.log("user disconnected " + socket.id);

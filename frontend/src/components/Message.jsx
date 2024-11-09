@@ -12,7 +12,7 @@ const Message = ({ownMessage,message}) => {
 
 
 
-	
+
 
 
 
@@ -23,22 +23,21 @@ const Message = ({ownMessage,message}) => {
     {ownMessage ? (
 				<Flex gap={2} alignSelf={"flex-end"}>
 				
-						{/* <Flex bg={"green.800"} maxW={"350px"} p={1} borderRadius={"md"}> */}
-							<Text bg={"blue.800"} maxW={"350px"} p={1} borderRadius={"md"}  color={"white"}>
+						<Flex bg={"green.800"} maxW={"350px"} p={1} borderRadius={"md"}>
+							<Text color={"white"}>
                                {message.text}
-							   <br/>
-							   <span style={{fontSize:"6px"}}>{message.createdAt} </span>
+							   {/* <span style={{fontSize:"6px"}}>{message.createdAt} </span> */}
                             </Text>
-                            <Avatar src={user.profilePic} w={7} h={7}/>
-							{/* <Box
+							<Box
 								alignSelf={"flex-end"}
 								ml={1}
-								color={ "blue.400" }
+								 color={message.seen? "blue.400":""}
 								fontWeight={"bold"}
 							>
 								<BsCheck2All size={16} />
-							</Box> */}
-						{/* </Flex> */}
+							</Box>
+						</Flex>
+                            <Avatar src={user.profilePic} w={7} h={7}/>
 				
                     </Flex>
   ):
