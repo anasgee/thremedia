@@ -91,6 +91,9 @@ const signinUser = async (req, res) => {
       });
     } else {
       generateTokenAndCookie(user._id, res);
+      user.isFrozen=false;
+      await user.save();
+      
       res.status(200).json({
         _id: user._id,
         name: user.name,
@@ -247,6 +250,30 @@ try {
 
 }
 
+
+
+const freezeAccount= async(req,res)=>{
+
+
+try {
+  const user = await User.findById(req.user._id);
+
+  if(!user){
+    res.status(400).json({error:"User not found"})
+    return;
+  }
+  user.isFrozen = true;
+  await user.save();
+res.status(200).json({success:true})
+  
+} catch (error) {
+  res.status(500).json(error.message);
+}
+
+}
+
+
+
 module.exports = {
   signupUser,
   signinUser,
@@ -254,5 +281,5 @@ module.exports = {
   followUnFollowUser,
   updateUser,
   getUserProfile,
-  suggestedUsers
+  suggestedUsers,freezeAccount
 };

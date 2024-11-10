@@ -14,7 +14,7 @@ const SocketContextProvider =({children})=>{
     const [socket,setSocket] = useState(null);
     const [onlineUsers,setOnlineUsers] = useState([])
 
-    console.log(onlineUsers,"Online users")
+    // console.log(onlineUsers,"Online users")
     // console.log(user?._id)
 
     useEffect(()=>{

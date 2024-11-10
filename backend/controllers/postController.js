@@ -37,7 +37,7 @@ if(img){
         res.status(201).json(newPost)
     }catch(error){
         res.status(400).json({error:error.message});
-        console.log("Something goes wrong in creating post" + error.message );
+        // console.log("Something goes wrong in creating post" + error.message );
     }
 }
 
@@ -112,7 +112,7 @@ const likeUnlikePost = async(req,res)=>{
         res.status(500).json({
             error:error.message,
                    })
-                   console.log("Error in like / unlike post");
+                //    console.log("Error in like / unlike post");
     }
 
 
@@ -147,7 +147,7 @@ const replyPost =async(req,res)=>{
 
    } catch (error) {
     res.status(404).json({ error: error.message}); 
-       console.log(" Error in replies function"+error.message)
+    //    console.log(" Error in replies function"+error.message)
    }
 }
 
@@ -170,7 +170,7 @@ const getFeedPosts = async(req,res)=>{
     } 
     catch (error) {
         res.status(500).json({error:error.message}); 
-        console.log( "Error in fetching following posts" + error.message  )
+        // console.log( "Error in fetching following posts" + error.message  )
     }
 }
 

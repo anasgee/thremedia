@@ -61,7 +61,7 @@
 				});
 
 				const data = await res.json();
-				console.log(data);
+				// console.log(data);
 				toast("Success","Post Deleted Successfully",'success')
 				navigate(`/${user.username}`)
 				setPost(post.filter((p) => p._id !== post._id));

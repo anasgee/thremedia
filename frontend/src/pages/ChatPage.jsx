@@ -100,7 +100,7 @@ const ChatPage = () => {
       const conversationAlreadyExists = conversations.find(
         (conversation) => conversation.participants[0]?._id === searchedUserId
       );
-	console.log(conversations.map((conversation)=>conversation.participants[0]?._id))
+	// console.log(conversations.map((conversation)=>conversation.participants[0]?._id))
 
       if (conversationAlreadyExists) {
       return  setSelectedConversation({
@@ -129,7 +129,7 @@ const ChatPage = () => {
       	},
       	]
       };	
-      console.log(mockConversation)
+      // console.log(mockConversation)
       setConversations((prevConv) => [...prevConv,mockConversation])
 
       // const mockConversation = {
@@ -150,7 +150,7 @@ const ChatPage = () => {
       // setConversations((prevConvs) => [...prevConvs, mockConversation]);
     } catch (error) {
       showToast("Error", error.message + error, "error");
-      console.log(error);
+      // console.log(error);
     } finally {
       setSearchingUser(false);
     }

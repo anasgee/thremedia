@@ -9,6 +9,7 @@ import { FiLogOut } from "react-icons/fi";
 import useLogout from "../hooks/useLogout";
 import authScreenAtom from "../atom/authscreenatom";
 import { BsFillChatQuoteFill } from "react-icons/bs";
+import { MdOutlineSettings } from "react-icons/md";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -47,6 +48,10 @@ const Header = () => {
             </Link>
             <Link as={RouterLink} to={`/chat`}>
               <BsFillChatQuoteFill size={20} />
+              
+            </Link>
+            <Link as={RouterLink} to={`/settings`}>
+              <MdOutlineSettings  size={20} />
               
             </Link>
             <Button

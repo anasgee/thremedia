@@ -22,7 +22,7 @@ const getRecipientSocketId = (recipientId) =>{
 const userSoketMap ={};
 io.on("connection",(socket)=>{
 
-    console.log("user connected at " + socket.id);
+    // console.log("user connected at " + socket.id);
     const userId = socket.handshake.query.userId;
    
 
@@ -48,7 +48,7 @@ io.on("connection",(socket)=>{
 
 
     socket.on("disconnect",()=>{
-         console.log("user disconnected " + socket.id);
+        //  console.log("user disconnected " + socket.id);
 
          // delete the users from map
          delete userSoketMap[userId];

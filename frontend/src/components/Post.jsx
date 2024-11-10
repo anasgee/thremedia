@@ -29,7 +29,7 @@ const Post = ({post,postedBy}) => {
             try{
                 const res = await fetch(`/api/users/profile/${postedBy}`);
                 const data = await res.json();
-                console.log(data)
+                // console.log(data)
                 if(data.error){
                     toast("Error Here", error.message,'error')
                     return;
@@ -56,7 +56,7 @@ const Post = ({post,postedBy}) => {
 			});
 
 			const data = await res.json();
-			console.log(data);
+			// console.log(data);
 			toast("Success","Post Deleted Successfully",'success')
 			setPosts(posts.filter((p) => p._id !== post._id));
 		}catch(error){

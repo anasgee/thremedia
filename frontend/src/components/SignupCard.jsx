@@ -59,12 +59,12 @@ const handleSignup = async () => {
       body: JSON.stringify(inputs),
     });
     const data = await res.json();
-    console.log(data)
+    // console.log(data)
 
    
     if(data.error){
       toast("Error Here",data.error,"error")
-      console.log(data.error)
+      // console.log(data.error)
     }
     localStorage.setItem("user-threads", JSON.stringify(data));
     setUser(data);
@@ -74,7 +74,7 @@ const handleSignup = async () => {
    }
   } catch (error) {
     toast("Error", error, "error");
-    console.log(error)
+    // console.log(error)
  
   }finally{
     setLoading(false)
