@@ -8,53 +8,11 @@ import useFollowUnfollow from '../hooks/useFollowUnfollow';
 
 const SuggestedUser = ({user}) => {
 
-    const currentUser  = useRecoilValue(userAtom);
-    
    const {handleFollowUnfollow,updating,following} = useFollowUnfollow(user);
-
-    const toast  = useShowToast();
-
-
-    //     e.preventDefault()
-    //     setUpdating(true)
-        
-    //    try {
-        
-    //     const res  = await fetch(`/api/users/follow/${user._id}`,{
-    //         method:"POST",
-    //         headers:{
-    //         "Content-Type":"application/json"
-    //         }
-    //     });
-
-    //     const data = await res.json();
-    //     if(data.error){
-    //             toast("error",data.error,"error");
-    //     }
-    //     if(following){
-    //         user.followers.pop();
-    //         toast("Success",`${user.name} unFollowed Successfully`,"success");
-    //     }
-    //     else{
-    //         toast("Success",`${user.name} Followed Successfully`,"success");
-    //         user.followers.push(currentUser._id);
-
-    //     }
-    //     setFollowing(!following);
+   
+   
 
 
-    //    } catch (error) {
-    //     toast("error",error.message,"error");
-        
-    //    }finally{
-    //     setUpdating(false)
-    //    }
-        
-    // }
-
-
-    // const following = false;
-  
   return (
      <Flex gap={2} justifyContent={"space-between"} alignItems={"center"}>
 			<Flex gap={2} as={Link} to={`${user.username}`}>
