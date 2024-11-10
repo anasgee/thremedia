@@ -1,11 +1,12 @@
 const express = require("express");
-const {signupUser,signinUser,logoutUser,followUnFollowUser,updateUser,getUserProfile} =require("../controllers/userController")
+const {signupUser,signinUser,logoutUser,followUnFollowUser,updateUser,getUserProfile,suggestedUsers} =require("../controllers/userController")
 const protectedRoute = require("../middlewares/protectedRoute")
 
 
 const router = express.Router();
 
 router.get("/profile/:query", getUserProfile);
+router.get('/suggested',protectedRoute,suggestedUsers)
 router.post("/signup", signupUser);
 router.post("/signin", signinUser);
 router.post("/signout", logoutUser);

@@ -209,6 +209,44 @@ const updateUser = async (req, res) => {
   }
 };
 
+
+const suggestedUsers = async(req,res)=>{
+
+  // current user or us user ko exclude krna hai jo already followed hain
+
+try {
+  
+
+  
+  const currentUserId = req.user._id;
+
+  const usersFollowedByYou  = await User.findById(currentUserId).select("following");
+
+  const users = await User.aggregate([
+    {
+      $match:{
+        _id:{$ne:currentUserId}
+      }
+    },
+    {
+      $sample:{size:10}
+    }
+  ]);
+
+  const filteredUsers = users.filter((user)=>!usersFollowedByYou.following.includes(user._id));
+
+  const suggestedUsers  = filteredUsers.slice(0,4);
+  suggestedUsers.forEach((user)=>user.password =null);
+
+  res.status(200).json(suggestedUsers);
+
+
+} catch (error) {
+  res.status(500).json({error:error.message});
+}
+
+}
+
 module.exports = {
   signupUser,
   signinUser,
@@ -216,4 +254,5 @@ module.exports = {
   followUnFollowUser,
   updateUser,
   getUserProfile,
+  suggestedUsers
 };

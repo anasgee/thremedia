@@ -10,15 +10,12 @@ import useShowToast from "../hooks/showToast"
 
 
 import {  NavLink } from 'react-router-dom';
+import useFollowUnfollow from '../hooks/useFollowUnfollow';
 
 const UserHeader = ({user}) => {
 	const currentUser = useRecoilValue(userAtom);
-	const [following, setFollowing] = useState(
-		Array.isArray(user.followers) ? user.followers.includes(currentUser?._id) : false
-	  );	
-	const [updating,setUpdating] = useState(false)
-
-
+	const {handleFollowUnfollow,updating,following} = useFollowUnfollow(user)
+	
 const toast  =useShowToast();
   const copyURL  = ()=>{
     const url = window.location.href;
@@ -29,45 +26,45 @@ const toast  =useShowToast();
   }
 
 
-  const handleFollowUnfollow =async()=>{
+//   const handleFollowUnfollow =async()=>{
 
-	if(!currentUser){
-		toast('error',"Please login first",'error');
-	}
-	setUpdating(true);
-		try{
-			const res = await fetch(`/api/users/follow/${user._id}`,{
-				method:"POST",
-				headers:{
-					'Content-Type':'application/json'
-				}
-			});
-			const data = await res.json();
+// 	if(!currentUser){
+// 		toast('error',"Please login first",'error');
+// 	}
+// 	setUpdating(true);
+// 		try{
+// 			const res = await fetch(`/api/users/follow/${user._id}`,{
+// 				method:"POST",
+// 				headers:{
+// 					'Content-Type':'application/json'
+// 				}
+// 			});
+// 			const data = await res.json();
 
-			if(data.error){
-				toast('error',data.error,'error')}
-				if(following){
-					toast('success',`${user.name} unfollowed successfully`,'success')
-					user.followers.pop();
-				}else{
+// 			if(data.error){
+// 				toast('error',data.error,'error')}
+// 				if(following){
+// 					toast('success',`${user.name} unfollowed successfully`,'success')
+// 					user.followers.pop();
+// 				}else{
 				
-						toast('success',`${user.name} followed successfully`,'success')
-						user.followers.push(currentUser?._id);
+// 						toast('success',`${user.name} followed successfully`,'success')
+// 						user.followers.push(currentUser?._id);
 					
 					
-				}
-				setFollowing(!following);
+// 				}
+// 				setFollowing(!following);
 
-		}catch(error){
-			console.log(error);
-			toast('error',error,'error')
+// 		}catch(error){
+// 			console.log(error);
+// 			toast('error',error,'error')
 
-		}
-		finally{
-			setUpdating(false);
-		}
+// 		}
+// 		finally{
+// 			setUpdating(false);
+// 		}
 
-  }
+//   }
 
   return <VStack gap={4} alignItems={"start"}>
 

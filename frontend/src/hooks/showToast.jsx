@@ -9,7 +9,9 @@ const useShowToast = () => {
           description,
           status,
           isClosable:true,
-          duration:2000
+          duration:2000,
+          position: "top-left", 
+         
       })
    },[toast])
   return showToast
