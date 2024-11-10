@@ -5,17 +5,20 @@ import conversationAtom, { selectedConversationAtom } from '../atom/messageAtom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { BsFillImageFill } from 'react-icons/bs';
 import usePreviewImg from '../hooks/usePreviewImg';
+import useShowToast from '../hooks/showToast';
 
 
 const MessageInput = ({setMessages}) => {
   const [messageText,setMessageText] = useState("");
+  const [isSending,setIsSending] = useState(false);
   const selectedConversation = useRecoilValue(selectedConversationAtom);
   const setconversation = useSetRecoilState(conversationAtom);
   const imageRef = useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleImageChange, imgUrl, setImgUrl } = usePreviewImg();
+  const toast = useShowToast();
   
-console.log(imgUrl)
+// console.log(imgUrl)
   const handleChange = (e)=>{
       setMessageText(e.target.value);
   }
@@ -23,6 +26,9 @@ console.log(imgUrl)
  
   const createMessage = async(e)=>{
     e.preventDefault();
+    if (!messageText && !imgUrl) return;
+		if (isSending) return;
+    setIsSending(true);
     try {
       const res = await fetch( `/api/messages`,{
         method:"POST",
@@ -31,7 +37,8 @@ console.log(imgUrl)
         },
         body:JSON.stringify({
           message:messageText,
-          recepientId:selectedConversation.userId
+          recepientId:selectedConversation.userId,
+          img:imgUrl
         })
       })
       const data = await res.json();
@@ -54,14 +61,16 @@ console.log(imgUrl)
       })
 
       setMessageText("")
+      setImgUrl("");
 
       // if(data.error){
       //   console.log(data.error);
       // }
      
     } catch (error) {
-      console.log(error)
-    }
+      toast ("Error",error.message,"error")
+    }finally{
+      setIsSending(false)    }
 
 
   }
@@ -100,11 +109,11 @@ console.log(imgUrl)
 								/>
 						</Flex>
 						<Flex justifyContent={"flex-end"} my={2}>
-							{/* {!isSending ? ( */}
-								<IoSendSharp size={24} cursor={"pointer"}  />
-							{/* ) : ( */}
-								{/* <Spinner size={"md"} /> */}
-							{/* )} */}
+							{!isSending ? (
+								<IoSendSharp size={24} cursor={"pointer"} onClick={createMessage}   />
+							) : (
+								<Spinner size={"md"} /> 
+							 )} 
 						</Flex>
 					</ModalBody>
 				</ModalContent>

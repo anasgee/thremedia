@@ -44,7 +44,7 @@ const Message = ({ownMessage,message}) => {
 						{message.img && (
 							<Flex mt={5} w={"200px"}>
 								<Image
-								 src='https://plus.unsplash.com/premium_photo-1673736136121-227cab583e22?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c291cmNlfGVufDB8fDB8fHww'
+								  src={message.img}
 								borderRadius={4}
 								alt='Message img'
 								/>
@@ -72,7 +72,7 @@ const Message = ({ownMessage,message}) => {
 							{message.img && (
 							<Flex mt={5} w={"200px"}>
 								<Image
-								 src='https://plus.unsplash.com/premium_photo-1673736136121-227cab583e22?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c291cmNlfGVufDB8fDB8fHww'
+								 src={message.img}
 								borderRadius={4}
 								alt='Message img'
 								/>
