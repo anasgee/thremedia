@@ -4,6 +4,7 @@ import useToast from "../hooks/showToast"
 import Post from "../components/Post";
 import { useRecoilState } from 'recoil';
 import postAtom from '../atom/postAtom';
+import SuggestedUsers from '../components/SuggestedUsers';
 
 
 
@@ -53,6 +54,9 @@ const toast = useToast();
 					<Post key={post._id} post={post} postedBy={post.postedBy} />
 				))}
 
+    </Box>
+    <Box flex={30}>
+        <SuggestedUsers/>
     </Box>
     </Flex>
 

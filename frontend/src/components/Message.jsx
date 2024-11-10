@@ -1,6 +1,6 @@
-import { Avatar, Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Avatar, Box, Flex, Image, Skeleton, Text } from '@chakra-ui/react'
 import {BsCheck2All} from "react-icons/bs"
-import React from 'react'
+import React, { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { selectedConversationAtom } from '../atom/messageAtom'
 import userAtom from '../atom/userAtom'
@@ -8,6 +8,8 @@ import userAtom from '../atom/userAtom'
 
 const Message = ({ownMessage,message}) => {
 	const [selectedConversation,setSelectedConversation ] = useRecoilState(selectedConversationAtom);
+	const [imgLoaded,setImgLoaded] = useState(false);
+
 	const user = useRecoilValue(userAtom)
 
 
@@ -41,13 +43,28 @@ const Message = ({ownMessage,message}) => {
 						)}
 
 
-						{message.img && (
+                        {message.img && !imgLoaded && (
+							<Flex mt={5} w={"300px"} h={"200px"} >
+								<Image src={message.img} hidden onLoad={()=>setImgLoaded(true)} />
+								<Skeleton w={"300px"} h={"200px"} /> 
+							</Flex>)
+							}
+
+							{message.img && imgLoaded && (
 							<Flex mt={5} w={"200px"}>
 								<Image
-								  src={message.img}
+								 src={message.img}
 								borderRadius={4}
 								alt='Message img'
 								/>
+								<Box
+								alignSelf={"flex-end"}
+								ml={1}
+								 color={message.seen? "blue.400":""}
+								fontWeight={"bold"}
+							>
+								<BsCheck2All size={16} />
+							</Box>
 
 							</Flex>
 						)}
@@ -69,7 +86,15 @@ const Message = ({ownMessage,message}) => {
 							
 
 							{/* { true && ( */}
-							{message.img && (
+
+							{message.img && !imgLoaded && (
+							<Flex mt={5} w={"200px"} h={"200px"} >
+								<Image src={message.img} hidden onLoad={()=>setImgLoaded(true)} />
+								<Skeleton w={"300px"} h={"200px"} /> 
+							</Flex>)
+							}
+
+							{message.img && imgLoaded && (
 							<Flex mt={5} w={"200px"}>
 								<Image
 								 src={message.img}

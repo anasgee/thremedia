@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Button,Container } from '@chakra-ui/react';
-import {Routes,Route, Navigate} from "react-router-dom";
+import {Routes,Route, Navigate, useLocation} from "react-router-dom";
 import PostPage from './pages/PostPage';
 import UserPage from './pages/UserPage';
 import Header from './components/Header';
@@ -12,12 +12,15 @@ import userAtom from "./atom/userAtom"
 import CreatePost from "./components/CreatePost"
 import ChatPage from './pages/ChatPage';
 
+
+
 const App =()=>{
     const user = useRecoilValue(userAtom)
+    const {pathname} = useLocation();
     // const { colorMode, toggleColorMode } = useColorMode()
     return(
         <Box position={"relative"} w='full'>
-        <Container maxW="620px">
+        <Container maxW={pathname==="/" ? "900px" :"620px"}>
        <Header/>
        <Routes>
            <Route path="/" element={user? <HomePage/> : <Navigate to="/auth"/> } />
