@@ -94,7 +94,7 @@ const Actions = ({post}) => {
 				body: JSON.stringify({ text: reply }),
 			});
 			const data = await res.json();
-			console.log(data)
+			// console.log(data)
 			if (data.error) return toast("Error", data.error, "error");
 
 			const updatedPosts = posts.map((p) => {
@@ -103,6 +103,7 @@ const Actions = ({post}) => {
 				}
 				return p;
 			});
+			setPosts(updatedPosts);
 			// 	setPost({...post,replies:[...post.replies,data.reply]});
 			toast("Success", "Reply posted successfully", "success");
 			onClose();

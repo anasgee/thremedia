@@ -8,10 +8,10 @@ const protectedRoute = async(req,res,next)=>{
         const token = req.cookies.jwt;
         if(!token){
             res.status(400).json({error:"Unauthorized access detected"});
-
+            return;
         }
         const decoded = jwt.verify(token,process.env.JWT_SECRET);
-        console.log(decoded.userId)
+        // console.log(decoded.userId)
 
         const user = await User.findById(decoded.userId).select("-password");
 

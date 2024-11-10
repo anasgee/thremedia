@@ -55,7 +55,7 @@ const toast = useToast();
 				))}
 
     </Box>
-    <Box flex={30}>
+    <Box flex={30} flexDirection={"column"} display={{base:"none",md:"flex"}}>
         <SuggestedUsers/>
     </Box>
     </Flex>

@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import conversationAtom, { selectedConversationAtom } from '../atom/messageAtom'
 import useShowToast from '../hooks/showToast'
 import userAtom from '../atom/userAtom'
+import messageAlert from "../assets/messageAlet.mp3"
 import { useSocket } from '../context/SocketContext'
 // import setConversation from ""
 
@@ -32,6 +33,10 @@ useEffect(()=>{
   setMessages((prevMessage)=> [...prevMessage,newMessage]);
 }
 
+if(!document.hasFocus()){
+  const sound = new Audio(messageAlert);
+sound.play();
+}
     setConversations((prev)=>{
         const updatedConversation = prev.map((conversation)=>{
           if(conversation._id === newMessage.conversationId){

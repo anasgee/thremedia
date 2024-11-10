@@ -1,9 +1,6 @@
 import { Avatar, Box, Button, Flex, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
-import useShowToast from '../hooks/showToast';
-import { useRecoilValue } from 'recoil';
-import userAtom from '../atom/userAtom';
 import useFollowUnfollow from '../hooks/useFollowUnfollow';
 
 const SuggestedUser = ({user}) => {
