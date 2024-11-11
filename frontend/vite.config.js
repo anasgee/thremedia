@@ -9,7 +9,7 @@ export default defineConfig({
     proxy:{
       "/api":{
         // target:"http://localhost:5000",
-        target:"https://thremedia.vercel.app",
+        target:"https://thremedia.vercel.app",  // backend sai kaam kr rha hai
         secure:false,
         changeOrigin:true
       }
