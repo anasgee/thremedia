@@ -19,7 +19,7 @@ const SocketContextProvider =({children})=>{
 
     useEffect(()=>{
 
-        const socket = io("http://localhost:5000",{
+        const socket = io("https://thremedia.vercel.app",{
             query:{
                 userId:user?._id
             },
