@@ -9,6 +9,7 @@ const v2 = require("cloudinary")
 const cloudinary = v2;
 const {server,app}  =require("./socket/socket")
 const path  = require("path")
+const cors = require("cors")
 
 
 dotenv.config();
