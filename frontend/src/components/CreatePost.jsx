@@ -51,9 +51,9 @@ const CreatePost = () => {
                 });
     
                 const data = await res.json();
-                console.log(data);
-                console.log(username);
-                console.log(user.username)
+                // console.log(data);
+                // console.log(username);
+                // console.log(user.username)
                 if (data.error) {
                     showToast("Error", data.error, "error");
                     return;

@@ -26,7 +26,7 @@ const getUserProfile = async (req, res) => {
 
     if (!user) {
       res.status(400).json({ error: "User not found" });
-      console.log("user not found");
+      // console.log("user not found");
     } else {
       res.status(200).json(user);
     }
@@ -34,7 +34,7 @@ const getUserProfile = async (req, res) => {
     res.status(500).json({
       error: error.message,
     });
-    console.log("Error in getting user" + error.message);
+    // console.log("Error in getting user" + error.message);
   }
 };
 
@@ -105,7 +105,7 @@ const signinUser = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
-    console.log(`Error in login ${error.message}`);
+    // console.log(`Error in login ${error.message}`);
   }
 };
 
@@ -147,7 +147,7 @@ const followUnFollowUser = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
-    console.log(`Error in Follow ${error.message}`);
+    // console.log(`Error in Follow ${error.message}`);
   }
 };
 
@@ -208,7 +208,7 @@ const updateUser = async (req, res) => {
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({ error: err.message });
-    console.log("Error in updateUser: ", err.message);
+    // console.log("Error in updateUser: ", err.message);
   }
 };
 

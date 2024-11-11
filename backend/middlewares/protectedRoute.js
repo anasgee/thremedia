@@ -21,7 +21,7 @@ const protectedRoute = async(req,res,next)=>{
 
     }catch(error){
         res.status(400).json({error:error.message})
-        console.log("Auhtentication error " + error.message)
+        // console.log("Auhtentication error " + error.message)
     }
 }
 

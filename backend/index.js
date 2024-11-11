@@ -8,12 +8,15 @@ const messageRoute =require("./routes/messageRoutes")
 const v2 = require("cloudinary")
 const cloudinary = v2;
 const {server,app}  =require("./socket/socket")
+const path  = require("path")
 
 
 dotenv.config();
 connectDB();
 
 const PORT = process.env.PORT || 5000;
+// const __dirname = path.resolve();
+// console.log();
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
@@ -32,7 +35,14 @@ app.use('/api/users',userRoutes);
 app.use('/api/posts',postRoutes);
 app.use('/api/messages',messageRoute);
 
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static(path.join(__dirname,"../frontend/dist")));
+}
 
+
+app.get("*",(req,res)=>{
+  res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))
+})
 
 server.listen(PORT,()=>{
     console.log(`Server is listening to the port ${PORT} at localhost`);
