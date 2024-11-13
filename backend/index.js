@@ -26,6 +26,13 @@ app.use(cors(
     credentials:true
   }
 ))  
+// app.use(cors(
+//   {
+//     origin:["https://thremedia.vercel.app"],
+//     methods:["GET","POST"],
+//     credentials:true
+//   }
+// ))  
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
