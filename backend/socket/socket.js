@@ -3,7 +3,6 @@ const http = require("http");
 const express = require("express");
 const Message = require("../models/messageModel");
 const Conversation = require("../models/conversationModel");
-// const cors  = require("cors")
 
 
 const app = express();
@@ -12,8 +11,9 @@ const server = http.createServer(app);
 
 const io = new Server(server,{
     cors:{
-        origin:"https://razathreads.vercel.app",
+        // origin:"https://razathreads.vercel.app",
         // origin:"http://localhost:3000",
+        origin:"/",
         methods:["GET","POST"],
 
     }
@@ -21,7 +21,7 @@ const io = new Server(server,{
 
 
 
-const getRecipientSocketId = (recipientId) =>{
+ const getRecipientSocketId = (recipientId) =>{
     return userSoketMap[recipientId];
 } 
 
@@ -29,9 +29,9 @@ const userSoketMap ={};
 io.on("connection",(socket)=>{
 
     // console.log("user connected at " + socket.id);
-   try{
+
     const userId = socket.handshake.query.userId;
-   
+//    console.log(userId)
 
 
     // added the user in map and assigned a socket id
@@ -64,9 +64,7 @@ io.on("connection",(socket)=>{
          io.emit("getOnlineUsers",Object.keys(userSoketMap)); 
     })
 
-   }catch(error){
-    console.log(error)
-   }
+  
 })
 
 module.exports = {io,server,app,getRecipientSocketId};

@@ -15,17 +15,18 @@ const cors = require("cors")
 dotenv.config();
 connectDB();
 
+
 const PORT = process.env.PORT || 5000;
 // const __dirname = path.resolve();
 // console.log();
 
-app.use(cors(
-  {
-    origin:["https://thremedia.vercel.app"],
-    methods:["GET","POST"],
-    credentials:true
-  }
-))  
+// app.use(cors(
+//   {
+//     origin:["https://thremedia.vercel.app"],
+//     methods:["GET","POST"],
+//     credentials:true
+//   }
+// ))  
 // app.use(cors(
 //   {
 //     origin:["https://thremedia.vercel.app"],

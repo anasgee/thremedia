@@ -15,17 +15,21 @@ const SocketContextProvider =({children})=>{
     const [onlineUsers,setOnlineUsers] = useState([])
 
     console.log(onlineUsers,"Online users")
-    console.log(user?._id)
+    // console.log(user?._id)
 
     useEffect(()=>{
+        // console.log("UseEffect Running correctly")
 
-        const socket = io("https://thremedia.vercel.app",{
+        // const socket = io("https://thremedia.vercel.app",{
+        const socket = io("http://localhost:5000",{
+        // const socket = io("/",{
             query:{
-                userId:user?._id
+                userId:user?._id,
             },
         })
 
         setSocket(socket);
+        // console.log(socket)
 
         socket.on("getOnlineUsers",(users)=>{
             setOnlineUsers(users);

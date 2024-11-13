@@ -21,13 +21,13 @@ const MessageContainer = () => {
   const [messages,setMessages] = useState([]);
   const {socket} = useSocket();
   const endMessageRef = useRef();
-console.log(selectedConversation)
+// console.log(selectedConversation)
 
 
 useEffect(()=>{
 
   socket.on("newMessage",(newMessage)=>{
-    console.log(newMessage);
+    // console.log(newMessage);
     if(selectedConversation._id === newMessage.conversationId )
 {
   setMessages((prevMessage)=> [...prevMessage,newMessage]);
@@ -35,7 +35,7 @@ useEffect(()=>{
 
 if(!document.hasFocus()){
   const sound = new Audio(messageAlert);
-sound.play();
+  sound.play();
 }
     setConversations((prev)=>{
         const updatedConversation = prev.map((conversation)=>{
@@ -57,7 +57,7 @@ sound.play();
   return () => socket.off("newMessage")
 
 },[socket,selectedConversation,setConversations]);
- 
+           
 
 useEffect(()=>{
 
