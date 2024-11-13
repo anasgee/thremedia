@@ -35,6 +35,11 @@ const PORT = process.env.PORT || 5000;
 //   }
 // ))  
 
+
+
+app.use(cors()) // Use this after the variable declaration
+
+
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
   api_key: process.env.API_KEY, 

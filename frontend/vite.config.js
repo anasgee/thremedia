@@ -8,8 +8,8 @@ export default defineConfig({
     port:3000,
     proxy:{
       "/api":{
-        target:"http://localhost:5000",
-        // target:"https://thremedia.vercel.app",  // backend sai kaam kr rha hai
+        // target:"http://localhost:5000",
+        target:"https://thremedia.vercel.app",  // backend sai kaam kr rha hai
         secure:false,
         changeOrigin:true
       }
