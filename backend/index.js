@@ -44,10 +44,10 @@ app.use('/api/users',userRoutes);
 app.use('/api/posts',postRoutes);
 app.use('/api/messages',messageRoute);
 
-app.use(req,res,next)=>{
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
 
-}
+// app.use(req,res,next)=>{
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+// }
 
 if(process.env.NODE_ENV === "production"){
   app.use(express.static(path.join(__dirname,"../frontend/dist")));
