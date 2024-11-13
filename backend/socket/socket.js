@@ -12,7 +12,8 @@ const io = new Server(server,{
     cors:{
         origin:"https://threadsmedia-one.vercel.app",
         // origin:"http://localhost:3000",
-        methods:["GET","POST"]
+        methods:["GET","POST"],
+
     }
 });
 
@@ -57,7 +58,7 @@ io.on("connection",(socket)=>{
          delete userSoketMap[userId];
 
         //  sent online users to front end
-         io.emit("getOnlineUsers",Object.keys(userSoketMap));
+         io.emit("getOnlineUsers",Object.keys(userSoketMap)); 
     })
 
    }catch(error){
