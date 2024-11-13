@@ -21,7 +21,8 @@ const SocketContextProvider =({children})=>{
         // console.log("UseEffect Running correctly")
 
         // const socket = io("https://thremedia.vercel.app",{
-        const socket = io("/",{
+        const socket = io("https://thremedia.vercel.app",{
+        // const socket = io("/",{
             query:{
                 userId:user?._id,
             },
