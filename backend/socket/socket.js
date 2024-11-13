@@ -25,6 +25,7 @@ const userSoketMap ={};
 io.on("connection",(socket)=>{
 
     // console.log("user connected at " + socket.id);
+   try{
     const userId = socket.handshake.query.userId;
    
 
@@ -58,6 +59,10 @@ io.on("connection",(socket)=>{
         //  sent online users to front end
          io.emit("getOnlineUsers",Object.keys(userSoketMap));
     })
+
+   }catch(error){
+    console.log(error)
+   }
 })
 
 module.exports = {io,server,app,getRecipientSocketId};
