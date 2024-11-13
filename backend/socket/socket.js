@@ -13,7 +13,7 @@ const io = new Server(server,{
     cors:{
         // origin:"https://razathreads.vercel.app",
         // origin:"http://localhost:3000",
-        origin:"/",
+        origin:"https://razathreads.vercel.app",
         methods:["GET","POST"],
 
     }
