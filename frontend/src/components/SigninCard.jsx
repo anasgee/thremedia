@@ -56,7 +56,7 @@ const handleSignin = async () => {
       body: JSON.stringify(inputs),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
 
     if(data.error){
       toast("Error Here",data.error,"error")
