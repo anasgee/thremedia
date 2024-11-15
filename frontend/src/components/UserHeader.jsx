@@ -103,8 +103,8 @@ const toast  =useShowToast();
     
     <Flex w={"full"} justifyContent={"space-between"} >
       <Flex gap={2} alignItems={"center"} color={"gray.light"} >
-        <Text  >
-          <Text>{Array.isArray(user.followers) ? user.followers.length : 0} followers</Text>
+        <Text>
+          <span>{Array.isArray(user.followers) ? user.followers.length : 0} followers</span>
 		  </Text>
         {/* <Text  >
          {user.following.length} followings

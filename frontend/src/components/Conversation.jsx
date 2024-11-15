@@ -72,10 +72,10 @@ const Conversation = ({ conversation,isOnline}) => {
 				</Text>
 				<Text fontSize={"xs"} display={"flex"} alignItems={"center"} gap={1}>
 					{currentUser._id === lastMessage.sender ? (
-						<Box color={lastMessage.seen ? "blue.400":""}>
+						<span color={lastMessage.seen ? "blue.400":""}>
 								<BsCheck2All size={16} />
 								
-						</Box>
+						</span>
 					) : "" }
 					{lastMessage.text.length >18 ? lastMessage.text.substring(0,18) +"..." : lastMessage.text || <BsImageFill size={10}/> }
 				</Text>

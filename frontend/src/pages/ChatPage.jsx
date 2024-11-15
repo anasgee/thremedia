@@ -10,7 +10,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-// import { GiConversation } from "react-icons/gi";
 import Conversation from "../components/Conversation";
 import MessageContainer from "../components/MessageContainer";
 import useShowToast from "../hooks/showToast";
@@ -236,7 +235,7 @@ const ChatPage = () => {
 
           {/* Posts Conversations.,.,.,.,.,.,.,..,.,.,.,.,.,. */}
         </Flex>
-        {!selectedConversation._id && (
+        {!selectedConversation?._id && (
           <Flex
             flex={70}
             borderRadius={"md"}
